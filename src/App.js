@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import './app.css';
+import './App.css';
 import GraphDisplay from './GraphDisplay';
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
