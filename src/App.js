@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import './App.css';
 import MachineInfoDisplay from './MachineInfoDisplay';
+import SplitPane from 'react-split-pane';
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -42,14 +43,16 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
-        <Grid container spacing={24} id="main-content">
-          <Grid item xs={12} sm={4}>
+        <div>
+          <SplitPane 
+            split="vertical"
+            defaultSize={500}
+            id="main-content"
+          >
             <Editor onMachineChange={this.onMachineChange} />
-          </Grid>
-          <Grid item xs={12} sm={8} id="right-content">
             <MachineInfoDisplay machineJson={machineJson} />
-          </Grid>
-        </Grid>
+          </SplitPane>
+        </div>
       </MuiThemeProvider>
     );
   }

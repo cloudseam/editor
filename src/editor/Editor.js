@@ -53,6 +53,7 @@ class Editor extends Component {
 
   render() {
     const { yaml } = this.state;
+
     return (
         <Dropzone
             accept={''}

@@ -15,6 +15,8 @@ class GraphDisplay extends Component {
     anchorEl: null,
   };
 
+  svgPanObject = null;
+
   static getDerivedStateFromProps(props, state) {
     state.smCatConfig = machineToSmcat(props.machineJson);
     if (state.smCatConfig) {
@@ -31,15 +33,22 @@ class GraphDisplay extends Component {
 
   componentDidMount() {
     if (this.refs.graph) {
-      const svg = this.refs.graph.querySelector("svg");
-      if (svg) svgPanZoom(svg);
+      this.updateGraphDisplay();
     }
   }
 
   componentDidUpdate() {
-    const svg = this.refs.graph.querySelector("svg");
-    if (svg) svgPanZoom(svg);
+    this.updateGraphDisplay();
   }
+
+  updateGraphDisplay = () => {
+    const svg = this.refs.graph.querySelector("svg");
+    if (svg) {
+      if (this.svgPanObject)
+        this.svgPanObject.destroy();
+      this.svgPanObject = svgPanZoom(svg);
+    }
+  };
 
   handleMenuClick = event => {
     this.setState({ anchorEl: event.currentTarget });
