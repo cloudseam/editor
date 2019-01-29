@@ -6,6 +6,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import './GraphDisplay.css';
+import svgPanZoom from 'svg-pan-zoom';
 
 class GraphDisplay extends Component {
   state = {
@@ -29,28 +30,33 @@ class GraphDisplay extends Component {
   }
 
   componentDidMount() {
-    const canvas = this.refs.graph;
-    window.canvg(canvas, this.state.svg);
+    if (this.refs.graph) {
+      const svg = this.refs.graph.querySelector("svg");
+      if (svg) svgPanZoom(svg);
+    }
   }
 
   componentDidUpdate() {
-      const canvas = this.refs.graph;
-      window.canvg(canvas, this.state.svg);
+    const svg = this.refs.graph.querySelector("svg");
+    if (svg) svgPanZoom(svg);
   }
 
-  handleClick = event => {
+  handleMenuClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = (direction) => {
+  handleMenuClose = (direction) => {
     if (!direction) direction = this.state.direction;
     this.setState({ anchorEl: null, direction });
   };
 
   download = () => {
-    var link = document.createElement('a');
+    const canvas = document.createElement('canvas');
+    window.canvg(canvas, this.state.svg);
+
+    const link = document.createElement('a');
     link.download = 'state-chart.png';
-    link.href = this.refs.graph.toDataURL();
+    link.href = canvas.toDataURL();
     link.click();
   };
 
@@ -67,23 +73,23 @@ class GraphDisplay extends Component {
 
             Direction: 
             <Button
-                aria-owns={anchorEl ? 'simple-menu' : undefined}
+                aria-owns={anchorEl ? 'direction-menu' : undefined}
                 aria-haspopup="true"
-                onClick={this.handleClick}
+                onClick={this.handleMenuClick}
             >
                 { direction }
             </Button>
             <Menu
-                id="simple-menu"
+                id="direction-menu"
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
-                onClose={() => this.handleClose()}
+                onClose={() => this.handleMenuClose()}
             >
-                <MenuItem onClick={() => this.handleClose('Left-Right')}>Left-Right</MenuItem>
-                <MenuItem onClick={() => this.handleClose('Top-Down')}>Top-Down</MenuItem>
+                <MenuItem onClick={() => this.handleMenuClose('Left-Right')}>Left-Right</MenuItem>
+                <MenuItem onClick={() => this.handleMenuClose('Top-Down')}>Top-Down</MenuItem>
             </Menu>
 
-            { svg && <canvas ref="graph" width="1200" />}
+            { svg && <div id="graph-output" ref="graph" dangerouslySetInnerHTML={{ __html: svg }} /> }
         </div>
     );
   }

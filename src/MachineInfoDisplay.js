@@ -20,12 +20,12 @@ class MachineInfoDisplay extends Component {
   }
 
   render() {
-    const { isValid, error } = this.state;
+    const { error } = this.state;
     const { machineJson } = this.props;
 
     return <Fragment>
         { error && <div>ERROR: { error.message }</div>}
-        { isValid && <GraphDisplay machineJson={machineJson} /> }
+        <GraphDisplay machineJson={error ? {} : machineJson} />
       </Fragment>;
   }
 }
