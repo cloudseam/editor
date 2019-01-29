@@ -70,7 +70,7 @@ class Editor extends Component {
                     onChange={this.onChange}
                     value={yaml}
                     name="editor"
-                    fontSize={18}
+                    fontSize={16}
                     height={"100%"}
                     width={"100%"}
                     minLines={10}
