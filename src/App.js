@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Editor from './editor/Editor';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import './App.css';
-import GraphDisplay from './GraphDisplay';
+import MachineInfoDisplay from './MachineInfoDisplay';
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -14,6 +14,9 @@ import blue from '@material-ui/core/colors/blue';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
+  },
+  typography: {
+    useNextVariants: true,
   },
 });
 
@@ -44,7 +47,7 @@ class App extends Component {
             <Editor onMachineChange={this.onMachineChange} />
           </Grid>
           <Grid item xs={12} sm={8} id="right-content">
-            <GraphDisplay machineJson={machineJson} />
+            <MachineInfoDisplay machineJson={machineJson} />
           </Grid>
         </Grid>
       </MuiThemeProvider>

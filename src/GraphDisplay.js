@@ -28,6 +28,11 @@ class GraphDisplay extends Component {
     return state;
   }
 
+  componentDidMount() {
+    const canvas = this.refs.graph;
+    window.canvg(canvas, this.state.svg);
+  }
+
   componentDidUpdate() {
       const canvas = this.refs.graph;
       window.canvg(canvas, this.state.svg);

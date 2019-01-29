@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@cloudseam/machine-validator": "^1.0.0",
     "@material-ui/core": "^3.9.1",
     "react": "^16.7.0",
     "react-ace": "^6.3.2",
