@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import machineToSmcat from './machineToSmcat';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import GraphDirectionSelection from './GraphDirectionSelection';
+import GraphDownloadOptions from './GraphDownloadOptions';
 import './GraphDisplay.css';
 import svgPanZoom from 'svg-pan-zoom';
 
@@ -12,7 +12,6 @@ class GraphDisplay extends Component {
   state = {
     smCatConfig : null,
     direction : 'Left-Right',
-    anchorEl: null,
   };
 
   svgPanObject = null;
@@ -42,6 +41,9 @@ class GraphDisplay extends Component {
   }
 
   updateGraphDisplay = () => {
+    if (!this.refs.graph)
+      return;
+
     const svg = this.refs.graph.querySelector("svg");
     if (svg) {
       if (this.svgPanObject)
@@ -50,53 +52,28 @@ class GraphDisplay extends Component {
     }
   };
 
-  handleMenuClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleMenuClose = (direction) => {
-    if (!direction) direction = this.state.direction;
-    this.setState({ anchorEl: null, direction });
-  };
-
-  download = () => {
-    const canvas = document.createElement('canvas');
-    window.canvg(canvas, this.state.svg);
-
-    const link = document.createElement('a');
-    link.download = 'state-chart.png';
-    link.href = canvas.toDataURL();
-    link.click();
+  onDirectionChange = (direction) => {
+    this.setState({ direction });
   };
 
   render() {
-    const { svg, anchorEl, direction } = this.state;
+    const { svg, direction } = this.state;
 
     return (
         <div id='graph-display'>
             
             <Typography variant="h5" color="inherit">
               State Machine Graph
-              { svg && <Button variant="contained" color="primary" style={{marginLeft:"20px"}} onClick={this.download}>Download</Button> }
             </Typography>
 
-            Direction: 
-            <Button
-                aria-owns={anchorEl ? 'direction-menu' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenuClick}
-            >
-                { direction }
-            </Button>
-            <Menu
-                id="direction-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={() => this.handleMenuClose()}
-            >
-                <MenuItem onClick={() => this.handleMenuClose('Left-Right')}>Left-Right</MenuItem>
-                <MenuItem onClick={() => this.handleMenuClose('Top-Down')}>Top-Down</MenuItem>
-            </Menu>
+            <Grid container spacing={16} alignItems="center">
+              <Grid item sm={3}>
+                <GraphDirectionSelection direction={direction} onDirectionChange={this.onDirectionChange} />
+              </Grid>
+              <Grid item sm={3}>
+                <GraphDownloadOptions svg={svg} />
+              </Grid>
+            </Grid>
 
             { svg && <div id="graph-output" ref="graph" dangerouslySetInnerHTML={{ __html: svg }} /> }
         </div>

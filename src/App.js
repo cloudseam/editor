@@ -3,9 +3,8 @@ import Editor from './editor/Editor';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import './App.css';
-import MachineInfoDisplay from './MachineInfoDisplay';
+import MachineInfoDisplay from './machineInfo/MachineInfoDisplay';
 import SplitPane from 'react-split-pane';
 
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
