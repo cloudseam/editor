@@ -18,6 +18,8 @@ class GraphDisplay extends Component {
 
   static getDerivedStateFromProps(props, state) {
     state.smCatConfig = machineToSmcat(props.machineJson);
+
+    console.log(state.smCatConfig);
     if (state.smCatConfig) {
       state.svg = window.smcat.render(
         state.smCatConfig,

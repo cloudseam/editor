@@ -9,24 +9,24 @@ class MachineInfoDisplay extends Component {
     error : null,
   };
 
-  componentDidUpdate(prevProps) {
-    if (this.props.machineJson !== prevProps.machineJson) {
-      machineValidator(this.props.machineJson)
-        .then(() => this.setState({ isValid : true }))
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.machineJson !== nextProps.machineJson) {
+      machineValidator(nextProps.machineJson)
+        .then(() => this.setState({ isValid : true, error : null, }))
         .catch((error) => this.setState({ isValid : false, error }));
-
-      this.setState({ isValid: null, error: null });
     }
+
+    return this.props.machineJson === nextProps.machineJson && nextState.isValid !== null;
   }
 
   render() {
-    const { error } = this.state;
+    const { error, isValid } = this.state;
     const { machineJson } = this.props;
 
     return (
       <div style={{ padding: '15px' }}>
         { error && <div>ERROR: { error.message }</div>}
-        <GraphDisplay machineJson={error ? {} : machineJson} />
+        <GraphDisplay machineJson={isValid ? machineJson : null} />
       </div>
     );
   }

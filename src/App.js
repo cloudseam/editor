@@ -42,7 +42,7 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
-        <div>
+        <div id="main-content">
           <SplitPane 
             split="vertical"
             defaultSize={500}
