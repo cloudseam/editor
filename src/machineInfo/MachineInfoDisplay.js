@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GraphDisplay from './GraphDisplay';
 import machineValidator from '@cloudseam/machine-validator';
+import { withTheme } from '@material-ui/core/styles';
 
 class MachineInfoDisplay extends Component {
   state = {
@@ -21,11 +22,20 @@ class MachineInfoDisplay extends Component {
 
   render() {
     const { error, isValid } = this.state;
-    const { machineJson } = this.props;
+    const { machineJson, theme } = this.props;
 
     return (
       <div style={{ padding: '15px' }}>
-        { error && <div>ERROR: { error.message }</div>}
+        { error && (
+          <div
+            style={{
+              backgroundColor: theme.palette.error.dark,
+              color: theme.palette.error.contrastText,
+              padding: "10px 15px",
+              marginBottom: "20px"
+            }}
+          ><strong>ERROR:</strong> { error.message }</div>
+        )}
         <GraphDisplay machineJson={isValid ? machineJson : null} />
       </div>
     );
@@ -36,4 +46,4 @@ MachineInfoDisplay.propTypes = {
     machineJson : PropTypes.object,
 };
 
-export default MachineInfoDisplay;
+export default withTheme()(MachineInfoDisplay);
