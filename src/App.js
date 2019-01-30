@@ -3,6 +3,7 @@ import Editor from './editor/Editor';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import './App.css';
 import MachineInfoDisplay from './machineInfo/MachineInfoDisplay';
 import SplitPane from 'react-split-pane';
@@ -36,9 +37,11 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <AppBar position="static">
           <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" style={{flexGrow:1}}>
               Cloudseam Machine Editor
             </Typography>
+            <Button color="inherit" href="https://github.com/cloudseam/docs">Docs</Button>
+            <Button color="inherit" href="https://github.com/cloudseam/editor">GitHub</Button>
           </Toolbar>
         </AppBar>
 
