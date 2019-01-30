@@ -34,7 +34,12 @@ class MachineInfoDisplay extends Component {
               padding: "10px 15px",
               marginBottom: "20px"
             }}
-          ><strong>ERROR:</strong> { error.message }</div>
+          >
+            <strong>ERROR:</strong>&nbsp;
+            Your machine definition is not valid. We'll eventually make the message easier to read.
+            <br /><br />
+            Details: { error.message }
+          </div>
         )}
         <GraphDisplay machineJson={isValid ? machineJson : null} />
       </div>
