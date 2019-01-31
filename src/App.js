@@ -40,7 +40,7 @@ class App extends Component {
             <Typography variant="h6" color="inherit" style={{flexGrow:1}}>
               Cloudseam Machine Editor
             </Typography>
-            <Button color="inherit" href="https://github.com/cloudseam/docs">Docs</Button>
+            <Button color="inherit" href="https://docs.cloudseam.app/">Docs</Button>
             <Button color="inherit" href="https://github.com/cloudseam/editor">GitHub</Button>
           </Toolbar>
         </AppBar>
