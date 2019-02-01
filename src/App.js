@@ -18,6 +18,10 @@ const theme = createMuiTheme({
   },
   typography: {
     useNextVariants: true,
+    fontFamily: [
+      "Poppins",
+      "sans-serif",
+    ]
   },
 });
 
