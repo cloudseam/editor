@@ -15,7 +15,9 @@ import blue from '@material-ui/core/colors/blue';
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: {
+      main: '#138fc2',
+    },
   },
   typography: {
     useNextVariants: true,
