@@ -42,6 +42,11 @@ class GraphDisplay extends Component {
     this.updateGraphDisplay();
   }
 
+  componentWillUnmount() {
+    if (this.svgPanObject)
+      this.svgPanObject.destroy();
+  }
+
   updateGraphDisplay = () => {
     if (!this.refs.graph)
       return;
@@ -78,6 +83,7 @@ class GraphDisplay extends Component {
             </Grid>
 
             { svg && <div id="graph-output" ref="graph" dangerouslySetInnerHTML={{ __html: svg }} /> }
+            { !svg && <p><em>Once you define a valid machine config, the state diagram will appear here.</em></p>}
         </div>
     );
   }
