@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import './App.css';
+import InstructionDisplay from './InstructionDisplay';
 import MachineInfoDisplay from './machineInfo/MachineInfoDisplay';
 import SplitPane from 'react-split-pane';
 
@@ -56,7 +57,10 @@ class App extends Component {
             id="main-content"
           >
             <Editor onMachineChange={this.onMachineChange} />
-            <MachineInfoDisplay machineJson={machineJson} />
+            <div style={{ padding: '15px' }}>
+              <InstructionDisplay />
+              <MachineInfoDisplay machineJson={machineJson} />
+            </div>
           </SplitPane>
         </div>
       </MuiThemeProvider>
